@@ -24,6 +24,7 @@ and generate Makefile in the build directory, and build the project.
 ```
 $ cmake ./CPPWordle
 ```
+```
 $ cmake --build ./CPPWordle-build
 ```
 LICENCE
