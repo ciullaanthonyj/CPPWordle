@@ -65,7 +65,7 @@ class Game {
 
 		std::string GetGameWord();
 
-		void changeColor(int color);
+		void changeColor(std::string newColor);
 
 		void clearScreen();
 

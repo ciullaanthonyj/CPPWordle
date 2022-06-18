@@ -18,12 +18,14 @@
 
 #include "Game.hpp"
 
+//Converts string to vector
 void Game::ConvertToVec(std::string OldWord, std::vector<char>& NewVector) {
 	for (int i = 0; i < 5; i++) {
 		NewVector.push_back(toupper(OldWord[i]));
 	}
 }
 
+//set private class properties:
 void Game::SetGameWord(std::vector<char> GameWord)
 {
 	SafeGameWord = GameWord;
@@ -44,6 +46,7 @@ void Game::SetRoundNumber()
 	SafeRoundNumber++;
 }
 
+//BIG BOY ALGORITHM lol
 bool Game::CompareWords()
 {
 	//initialize a temp vector to hold the correct characters,
@@ -54,12 +57,12 @@ bool Game::CompareWords()
 
 	//Exact Match
 	if (SafePlayerWord == SafeGameWord) {
-		changeColor(10); //green
+		changeColor("green"); //green
 
 		for (auto& num : SafePlayerWord) {
 			std::cout << num;
 		}
-		changeColor(15);
+		changeColor("white");
 		return true;
 	}
 
@@ -74,30 +77,30 @@ bool Game::CompareWords()
 		//Check for correct char
 		for (int i = 0; i < 5; i++) {
 			if (SafePlayerWord[i] == SafeGameWord[i]) {
-				changeColor(10); //green
+				changeColor("green"); //green
 				std::cout << SafePlayerWord[i];
-				changeColor(15); //white
+				changeColor("white"); //white
 			}
 			//Check for correct char wrong place
 			else if (find(SafeGameWord.begin(), SafeGameWord.end(), SafePlayerWord[i]) != SafeGameWord.end()) {
 				//Make sure that the char isn't correct somewhere in the word
 				if (find(correct.begin(), correct.end(), SafePlayerWord[i]) == correct.end()) {
-					changeColor(14); //yellow
+					changeColor("yellow"); //yellow
 					std::cout << SafePlayerWord[i];
-					changeColor(15); //white
+					changeColor("white"); //white
 				}
 				//if it is print it gray
 				else {
-					changeColor(8); //gray
+					changeColor("gray"); //gray
 					std::cout << SafePlayerWord[i];
-					changeColor(15); //white
+					changeColor("white"); //white
 				}
 			}
 			//lastly wrong char doesn't belong in word.
 			else {
-				changeColor(8); //gray
+				changeColor("gray"); //gray
 				std::cout << SafePlayerWord[i];
-				changeColor(15); //white
+				changeColor("white"); //white
 			}
 		}
 		return false;
@@ -122,6 +125,7 @@ int Game::GetRoundNumber()
 	return SafeRoundNumber;
 }
 
+//Returns game word
 std::string Game::GetGameWord()
 {
 	std::string TempGameWordString;
@@ -131,34 +135,31 @@ std::string Game::GetGameWord()
 	return TempGameWordString;
 }
 
-void Game::changeColor(int color)
+//Change the color of the console text via ansi. Haven't gotten functional 100% on CMake build from github copy outside of vs
+void Game::changeColor(std::string newColor)
 {
-	switch (color) {
-		//11 15 10 14 8
-	case 8: //gray
+	//Couldn't figure out the enum type or how to properly match it so this will have to do for now
+	if (newColor == "gray") {
 		std::cout << "\033[38;2;192;192;192m";
-		break;
-	case 10: //green
+	}
+	if (newColor == "green") {
 		std::cout << "\033[38;2;0;255;0m";
-		break;
-	case 11: //header color
+	}
+	if (newColor == "blue") {
 		std::cout << "\033[38;2;0;204;204m";
-		break;
-	case 12: //red
+	}
+	if (newColor == "red") {
 		std::cout << "\033[38;2;255;0;0m";
-		break;
-	case 14: //yellow
+	}
+	if (newColor == "yellow") {
 		std::cout << "\033[38;2;255;255;0m";
-		break;
-	case 15: //bright white
+	}
+	if (newColor == "white") {
 		std::cout << "\033[38;2;255;255;255m";
-		break;
-	default:
-		std::cout << "\033[38;2;255;255;255m";
-		break;
 	}
 }
 
+//Clears screen for gameplay
 void Game::clearScreen()
 {
 	for (int i = 0; i < 50; i++) {
@@ -166,6 +167,7 @@ void Game::clearScreen()
 	}
 }
 
+//Checks to verify the length of the string and ensure it's 5, if not it can ask for the variable and change it via the reference
 void Game::verifyLength(std::string& word)
 {
 	//reset input
@@ -173,15 +175,16 @@ void Game::verifyLength(std::string& word)
 	std::cin.ignore();
 
 	if (word.size() != 5) {
-		changeColor(12);
+		changeColor("red");
 		std::cout << "Invalid input. Try again:";
-		changeColor(15);
+		changeColor("white");
 		std::cout << " ";
 		std::cin >> word;
 		verifyLength(word);
 	}
 }
 
+//Checks to verify the length of the number or that it's a real num. Can ask for a new number and change it via reference variable
 void Game::verifyNum(int& num)
 {
 	//clear input to surpress that whole loop screaming invalid input lol
@@ -190,9 +193,9 @@ void Game::verifyNum(int& num)
 
 	if (num <= 0) {
 		//number is negative invalid
-		changeColor(12);
+		changeColor("red");
 		std::cout << "Invalid input. Try again:";
-		changeColor(15);
+		changeColor("white");
 		std::cout << " ";
 		std::cin >> num;
 		verifyNum(num);

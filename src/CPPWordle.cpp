@@ -30,14 +30,14 @@ int main()
 	std::cout << std::fixed << std::setprecision(1) << std::showpoint << std::endl;
 
 	//Header
-	mygame.changeColor(11);
+	mygame.changeColor("blue");
 	std::cout
 		<< "################################################################################\n"
 		<< "#        CPPWordle                Version " << VERSION << "              Anthony Ciulla      #\n"
 		<< "################################################################################\n"
 		<<
 		std::endl;
-	mygame.changeColor(15);
+	mygame.changeColor("white");
 	//Program Description
 	std::cout << std::endl;
 	std::cout
@@ -50,22 +50,22 @@ int main()
 		<< "indicating if it was correct or wrong.\n"
 		<<
 		std::endl;
-	mygame.changeColor(10);
+	mygame.changeColor("green");
 	std::cout
 		<< "This color indicates the letter is in the correct place and spot in the word"
 		<<
 		std::endl;
-	mygame.changeColor(14);
+	mygame.changeColor("yellow");
 	std::cout
 		<< "This color indicates the letter appears in the word but not in the current spot"
 		<<
 		std::endl;
-	mygame.changeColor(8);
+	mygame.changeColor("gray");
 	std::cout
 		<< "This color indicates the letter does not appear in the word\n"
 		<<
 		std::endl;
-	mygame.changeColor(15);
+	mygame.changeColor("white");
 
 	bool continuePlaying = true;
 
