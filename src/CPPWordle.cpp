@@ -16,41 +16,56 @@
  *  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Game.h"
+#include "Game.hpp"
 
 int main()
 {
 	//Class Declaration
-	Word w;
 	Game g;
 
 	//Variable Declaration
-	int userInputInt;
-	bool gameControl = true;
+
 	bool ansCheck = false;
 	bool continuePlaying = true;
+	bool gameControl = true;
 	bool playerInput = true;
-	string userInputString;
 	char userInputChar;
-	vector<char> unsafeGameWord;
-	vector<char> unsafePlayerWord;
+	int maxNumberAttempts;
+	int attemptNumber;
+	std::string gameWord;
+	std::string playerWord;
+	std::vector<char> gameWordVector;
+	std::vector<char> playerWordVector;
+
 
 	//Header
-	w.displayHeader();
+	g.displayHeader();
 
 	while (continuePlaying) {
-		g.resetAttemptNumber();
-		g.resetGameWord();
-		g.resetPlayerWord();
+
+		//Reset Variables
+
+		attemptNumber = 0;
+		gameWord = "";
+		gameWordVector.clear();
+		playerWord = "";
+		playerWordVector.clear();
 		continuePlaying = false;
 		gameControl = false;
 		playerInput = true;
+
+		//Ask if player wants to play
+		//This is also where the loop will run to if they 
+		//want to play again
 
 		std::cout << std::endl << "would you like to play? (y/n): ";
 		std::cin >> userInputChar;
 		std::cout << std::endl;
 
-		char playAgain = toupper(userInputChar); //force decision to upper
+		//Do they want to play again? 
+		//Force input char to upper and check it with switch
+
+		char playAgain = toupper(userInputChar);
 		switch (playAgain) {
 		case 'Y':
 			gameControl = true;
@@ -65,73 +80,74 @@ int main()
 			break;
 		}
 
+		//They want to play
 		while (gameControl == true) {
-			//get max attempts allowed
-			cout << "\nHow many attempts allowed: ";
-			cin >> userInputInt;
-			w.verifyNum(userInputInt);
-			g.setMaxAttempts(userInputInt);
-			cout << "\n" << endl;
+
+			//get max attempts allowed and verify it's a number
+			std::cout << "\nHow many attempts allowed: ";
+			std::cin >> maxNumberAttempts;
+			g.verifyNum(maxNumberAttempts);
+			std::cout << "\n" << std::endl;
 
 			//get word to be guessed from player
-			cout << "What word would you like the player to guess: ";
-			cin >> userInputString;
-			cout << "\n" << endl;
+			std::cout << "What word would you like the player to guess: ";
+			std::cin >> gameWord;
+			std::cout << "\n" << std::endl;
 
 			//verify / set word
-			w.verifyLength(userInputString);
-			g.setGameWord(userInputString);
+			g.verifyLength(gameWord);
+			g.convertToVec(gameWord, gameWordVector);
+	
 
 			// clear screen
 			g.clearScreen();
 
 			//get players word
-			cout << "Enter a five character word: \n";
+			std::cout << "Enter a five character word: \n";
 
 			//guess
 			while (playerInput == true) {
-				g.setAttemptNumber(1);
+				
+				//Begin attempt
+				attemptNumber += 1;
 
-				//set attempt num local and max attempt num local
-				int unsafeGameAttemptNum = g.getAttemptNumber();
-				int unsafeMaxAttemptNum = g.getMaxAttempts();
+				//reset playerWord
+				playerWord = "";
+				playerWordVector.clear();
 
-				cout << "\nGUESS (" << unsafeGameAttemptNum << "/" << unsafeMaxAttemptNum << "): ";
+				std::cout << "\nGUESS (" << attemptNumber << "/" << maxNumberAttempts << "): ";
 
 				//get and verify guess
-				cin >> userInputString;
-				w.verifyLength(userInputString);
-				g.setPlayerWord(userInputString);
+				std::cin >> playerWord;
+				g.verifyLength(playerWord);
+				g.convertToVec(playerWord, playerWordVector);
 
-				//localize gameWord and playerWord vector
-				unsafePlayerWord = g.getPlayerWordVector();
-				unsafeGameWord = g.getGameWordVector();
 
 				//compare
-				ansCheck = g.compareChar(unsafePlayerWord, unsafeGameWord);
+				ansCheck = g.compareChar(playerWordVector, gameWordVector);
 
 
 				//works
 				if (ansCheck == true) {
 					//correct answer
-					cout << "\nSuccess! It took you " << unsafeGameAttemptNum << " tries!\n";
+					std::cout << "\nSuccess! It took you " << attemptNumber << " tries!\n";
+					//reset the while loops
 					gameControl = false;
 					continuePlaying = true;
 					playerInput = false;
 				}
 				if (ansCheck != true) {
+					//wrong answer, keep the loop going for the Nth try
 					playerInput = true;
 				}
 
-				if (unsafeGameAttemptNum == unsafeMaxAttemptNum && ansCheck != true) {
+				if (attemptNumber == maxNumberAttempts && ansCheck != true) {
+					//reset loops, player lost via max attempts
 					playerInput = false;
 					continuePlaying = true;
 					gameControl = false;
 
-					cout << "\nFailure. The correct word was: ";
-					g.getGameWord();
-					cout << "\n";
-					break;
+					std::cout << "\nFailure. The correct word was: " << gameWord << "\n";
 				}
 			}
 		}
