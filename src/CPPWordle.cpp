@@ -26,6 +26,8 @@ int main()
 	//Class Declaration
 	Game mygame;
 
+	//set output
+	std::cout << std::fixed << std::setprecision(1) << std::showpoint << std::endl;
 
 	//Header
 	mygame.changeColor(11);
