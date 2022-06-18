@@ -1,4 +1,5 @@
-<div class="center">CPPWordle</div>
+CPPWordle
+
 =============
 
 This is a practice project for COSC. I implemented a basis version of Wordle
