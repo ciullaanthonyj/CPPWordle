@@ -20,13 +20,37 @@
 
 void Word::changeColor(int color)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+	switch (color) {
+		//11 15 10 14 8
+		case 8: //gray
+			cout << "\033[38;2;192;192;192m";
+			break;
+		case 10: //green
+			cout << "\033[38;2;0;255;0m";
+			break;
+		case 11: //header color
+			cout << "\033[38;2;0;204;204m";
+			break;
+		case 12: //red
+			cout << "\033[38;2;255;0;0m";
+			break;
+		case 14: //yellow
+			cout << "\033[38;2;255;255;0m";
+			break;
+		case 15: //bright white
+			cout << "\033[38;2;255;255;255m";
+			break;
+		default:
+			cout << "\033[38;2;255;255;255m";
+			break;
+	}
 }
 
 void Word::verifyLength(string& word)
 {
 	cin.clear();
 	cin.ignore();
+
 	if (word.size() != 5) {
 		changeColor(12);
 		cout << "Invalid input. Try again:";
@@ -39,10 +63,11 @@ void Word::verifyLength(string& word)
 
 void Word::verifyNum(int& num)
 {
+	cin.clear();
+	cin.ignore();
+
 	if (num <= 0) {
 		//number is negative invalid
-		cin.clear();
-		cin.ignore();
 		changeColor(12);
 		cout << "Invalid input. Try again:";
 		changeColor(15);
@@ -54,10 +79,8 @@ void Word::verifyNum(int& num)
 
 void Word::convertToVec(std::string oldString, std::vector<char>& newVector)
 {
-	for (int i = 0; i < oldString.size(); i++) {
-		char currentChar = toupper(oldString[i]);
-		newVector.begin();
-		newVector.push_back(currentChar);
+	for (auto& num : oldString) {
+		newVector.push_back(toupper(num));
 	}
 }
 

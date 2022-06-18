@@ -65,17 +65,19 @@ int Game::getMaxAttempts()
 }
 
 bool Game::compareChar(vector<char>& i, vector<char>& j)
-{ //player == i game == j
+{ 
+	//initialize a temp vector to hold the correct characters,
+	//so that we can test against them. This is for the common
+	//case of the word being 'hyper' and the guess being
+	//'reset'
 
 	vector<char> correct;
-	//compare the two vectors
-	//correct
-	char dups[5];
 
 	if (i == j) {
 		w.changeColor(10); //green
-		for (int k = 0; k < 5; k++) {
-			cout << i[k];
+		
+		for (auto& num : i) {
+			cout << num;
 		}
 		w.changeColor(15);
 		return true;
@@ -86,6 +88,7 @@ bool Game::compareChar(vector<char>& i, vector<char>& j)
 				correct.push_back(i[k]);
 			}
 		}
+
 		for (int k = 0; k < 5; k++) {
 			if (i[k] == j[k]) {
 				w.changeColor(10); //green
