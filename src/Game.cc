@@ -132,3 +132,15 @@ void Game::resetAttemptNumber()
 {
 	g.attemptNumber = 0;
 }
+
+void Game::resetGameWord()
+{
+	g.gameWordVector.clear();
+	g.gameWord = "";
+}
+
+void Game::resetPlayerWord()
+{
+	g.playerWordVector.clear();
+	g.playerWord = "";
+}

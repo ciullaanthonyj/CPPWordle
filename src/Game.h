@@ -68,5 +68,10 @@ class Game {
 		void getGameWord();
 
 		void resetAttemptNumber();
+
+		void resetGameWord();
+
+		void resetPlayerWord();
+
 };
 
