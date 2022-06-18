@@ -19,16 +19,17 @@ Then create build directory
 $ mkdir CPPWordle-build
 ```
 
-and generate Makefile in the build directory, and build the project.
+Next, generate build files
 
 ```
-$ cmake ./CPPWordle
+$ cmake -B CPPWordle-Build -S CPPWordle
 ```
+Build
 ```
-$ cmake --build ./CPPWordle-build
+$ cmake --build CPPWordle-build
 ```
 LICENCE
 -------
 
-GNU GPL v3
+gpl-3.0
 
