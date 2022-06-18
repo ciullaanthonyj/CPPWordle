@@ -20,8 +20,6 @@
 
 int main()
 {
-	//Class Declaration
-	Game g;
 
 	//Variable Declaration
 
@@ -37,9 +35,18 @@ int main()
 	std::vector<char> gameWordVector;
 	std::vector<char> playerWordVector;
 
+	//Function Declaration
+	void changecolor(int color);
+	void convertToVec(std::string oldString, std::vector<char>&newVector);
+	void displayHeader();
+	bool compareChar(std::vector<char>&i, std::vector<char>&j);
+	void clearScreen();
+	void verifyLength(std::string & word);
+	void verifyNum(int& num);
+
 
 	//Header
-	g.displayHeader();
+	displayHeader();
 
 	while (continuePlaying) {
 
@@ -66,6 +73,8 @@ int main()
 		//Force input char to upper and check it with switch
 
 		char playAgain = toupper(userInputChar);
+
+		//switch control
 		switch (playAgain) {
 		case 'Y':
 			gameControl = true;
@@ -86,7 +95,7 @@ int main()
 			//get max attempts allowed and verify it's a number
 			std::cout << "\nHow many attempts allowed: ";
 			std::cin >> maxNumberAttempts;
-			g.verifyNum(maxNumberAttempts);
+			verifyNum(maxNumberAttempts);
 			std::cout << "\n" << std::endl;
 
 			//get word to be guessed from player
@@ -95,12 +104,12 @@ int main()
 			std::cout << "\n" << std::endl;
 
 			//verify / set word
-			g.verifyLength(gameWord);
-			g.convertToVec(gameWord, gameWordVector);
+			verifyLength(gameWord);
+			convertToVec(gameWord, gameWordVector);
 	
 
 			// clear screen
-			g.clearScreen();
+			clearScreen();
 
 			//get players word
 			std::cout << "Enter a five character word: \n";
@@ -119,12 +128,12 @@ int main()
 
 				//get and verify guess
 				std::cin >> playerWord;
-				g.verifyLength(playerWord);
-				g.convertToVec(playerWord, playerWordVector);
+				verifyLength(playerWord);
+				convertToVec(playerWord, playerWordVector);
 
 
 				//compare
-				ansCheck = g.compareChar(playerWordVector, gameWordVector);
+				ansCheck = compareChar(playerWordVector, gameWordVector);
 
 
 				//works
