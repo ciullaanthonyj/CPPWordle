@@ -22,7 +22,7 @@ $ mkdir CPPWordle-build
 Next, generate build files
 
 ```
-$ cmake -B CPPWordle-Build -S CPPWordle
+$ cmake -B CPPWordle-build -S CPPWordle
 ```
 Build
 ```
