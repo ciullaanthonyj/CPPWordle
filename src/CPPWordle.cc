@@ -110,6 +110,7 @@ int main()
 				//compare
 				ansCheck = g.compareChar(unsafePlayerWord, unsafeGameWord);
 
+
 				//works
 				if (ansCheck == true) {
 					//correct answer

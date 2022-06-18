@@ -20,9 +20,7 @@
 
 #include <iostream>
 #include <vector>
-#include <windows.h>
 #include <string>
-#include <Windows.h>
 #include "Word.h"
 #include <map>
 

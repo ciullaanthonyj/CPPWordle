@@ -40,7 +40,9 @@ bld/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
-
+/CMakeLists.txt
+/CMakePresets.json
+/src/CMakeLists.txt
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
