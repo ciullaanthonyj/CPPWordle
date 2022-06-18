@@ -25,6 +25,8 @@ void Word::changeColor(int color)
 
 void Word::verifyLength(string& word)
 {
+	cin.clear();
+	cin.ignore();
 	if (word.size() != 5) {
 		changeColor(12);
 		cout << "Invalid input. Try again:";
@@ -39,6 +41,8 @@ void Word::verifyNum(int& num)
 {
 	if (num <= 0) {
 		//number is negative invalid
+		cin.clear();
+		cin.ignore();
 		changeColor(12);
 		cout << "Invalid input. Try again:";
 		changeColor(15);

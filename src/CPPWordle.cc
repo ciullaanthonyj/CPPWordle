@@ -96,7 +96,7 @@ int main()
 				int unsafeGameAttemptNum = g.getAttemptNumber();
 				int unsafeMaxAttemptNum = g.getMaxAttempts();
 
-				cout << "\n(" << unsafeGameAttemptNum << "/" << unsafeMaxAttemptNum << "): ";
+				cout << "\nGUESS (" << unsafeGameAttemptNum << "/" << unsafeMaxAttemptNum << "): ";
 
 				//get and verify guess
 				cin >> userInputString;
@@ -110,18 +110,6 @@ int main()
 				//compare
 				ansCheck = g.compareChar(unsafePlayerWord, unsafeGameWord);
 
-
-				if (unsafeGameAttemptNum == unsafeMaxAttemptNum) {
-					playerInput = false;
-					continuePlaying = true;
-					gameControl = false;
-
-					cout << "\nFailure. The correct word was: ";
-					g.getGameWord();
-					cout << "\n";
-					break;
-				}
-
 				//works
 				if (ansCheck == true) {
 					//correct answer
@@ -132,6 +120,17 @@ int main()
 				}
 				if (ansCheck != true) {
 					playerInput = true;
+				}
+
+				if (unsafeGameAttemptNum == unsafeMaxAttemptNum && ansCheck != true) {
+					playerInput = false;
+					continuePlaying = true;
+					gameControl = false;
+
+					cout << "\nFailure. The correct word was: ";
+					g.getGameWord();
+					cout << "\n";
+					break;
 				}
 			}
 		}
