@@ -1,11 +1,4 @@
-[![Contributors][contributors-shield]][https://github.com/ciullaanthonyj/CPPWordle/graphs/contributors]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![GPL License][license-shield]][license-url]
-
-
-CPPWordle
+<div class="center">CPPWordle</div>
 =============
 
 This is a practice project for COSC. I implemented a basis version of Wordle
