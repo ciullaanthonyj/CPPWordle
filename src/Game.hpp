@@ -40,25 +40,32 @@ void changeColor(int color){
 	switch (color) {
 		//11 15 10 14 8
 	case 8: //gray
-		std::cout << "\033[38;2;192;192;192m";
+		//std::cout << "\033[38;2;192;192;192m";
+		printf("\033[38;2;192;192;192m");
 		break;
 	case 10: //green
-		std::cout << "\033[38;2;0;255;0m";
+		//std::cout << "\033[38;2;0;255;0m";
+		printf("\033[38;2;0;255;0m");
 		break;
 	case 11: //header color
-		std::cout << "\033[38;2;0;204;204m";
+		//std::cout << "\033[38;2;0;204;204m";
+		printf("\033[38;2;0;204;204m");
 		break;
 	case 12: //red
-		std::cout << "\033[38;2;255;0;0m";
+		//std::cout << "\033[38;2;255;0;0m";
+		printf("\033[38;2;255;0;0m");
 		break;
 	case 14: //yellow
-		std::cout << "\033[38;2;255;255;0m";
+		//std::cout << "\033[38;2;255;255;0m";
+		printf("\033[38;2;255;255;0m");
 		break;
 	case 15: //bright white
-		std::cout << "\033[38;2;255;255;255m";
+		//std::cout << "\033[38;2;255;255;255m";
+		printf("\033[38;2;255;255;255m");
 		break;
 	default:
-		std::cout << "\033[38;2;255;255;255m";
+		//std::cout << "\033[38;2;255;255;255m";
+		printf("\033[38;2;255;255;255m");
 		break;
 	}
 }
