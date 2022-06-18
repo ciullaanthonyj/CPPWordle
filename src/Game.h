@@ -24,6 +24,7 @@
 #include <string>
 #include <Windows.h>
 #include "Word.h"
+#include <map>
 
 using namespace std;
 

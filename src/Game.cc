@@ -67,8 +67,11 @@ int Game::getMaxAttempts()
 bool Game::compareChar(vector<char>& i, vector<char>& j)
 { //player == i game == j
 
+	vector<char> correct;
 	//compare the two vectors
 	//correct
+	char dups[5];
+
 	if (i == j) {
 		w.changeColor(10); //green
 		for (int k = 0; k < 5; k++) {
@@ -80,14 +83,26 @@ bool Game::compareChar(vector<char>& i, vector<char>& j)
 	else {
 		for (int k = 0; k < 5; k++) {
 			if (i[k] == j[k]) {
+				correct.push_back(i[k]);
+			}
+		}
+		for (int k = 0; k < 5; k++) {
+			if (i[k] == j[k]) {
 				w.changeColor(10); //green
 				cout << i[k];
 				w.changeColor(15); //white
 			}
 			else if (find(j.begin(), j.end(), i[k]) != j.end()) {
-				w.changeColor(14); //yellow
-				cout << i[k];
-				w.changeColor(15); //white
+				if (find(correct.begin(), correct.end(), i[k]) == correct.end()) {
+					w.changeColor(14); //yellow
+					cout << i[k];
+					w.changeColor(15); //white
+				}
+				else {
+					w.changeColor(8); //gray
+					cout << i[k];
+					w.changeColor(15); //white
+				}
 			}
 			else {
 				w.changeColor(8); //gray
