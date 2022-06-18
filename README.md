@@ -1,5 +1,5 @@
-<div class="center">CPPWordle</div>
-=============
+CPPWordle
+-------------
 
 This is a practice project for COSC. I implemented a basis version of Wordle
 in C++. It allows you to choose the word and number of attempts you're guessing.
