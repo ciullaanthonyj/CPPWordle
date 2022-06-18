@@ -1,6 +1,6 @@
 /*
- *  File: Word.h
- *  Desc: main header file for Words
+ *  File: game.h
+ *  Desc: main header file for game
  *  Author: Anthony Ciulla
  *
  *  This file is part of cWordle.
@@ -16,11 +16,41 @@
  *  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class Word {
+#pragma once
+
+#ifndef GAME_H
+
+#define GAME_H
+
+//library headers
+#include <algorithm>
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+
+#endif
+
+
+
+class Game {
 	public:
+
+		bool compareChar(std::vector<char>& i, std::vector<char>& j);
+		
+		void includesChar(char i, std::vector<char> gameWordVector);
+
+		void clearScreen();
+
 		void changeColor(int color);
+
 		void verifyLength(std::string& word);
+
 		void verifyNum(int& num);
+
 		void convertToVec(std::string oldString, std::vector<char>& newVector);
+
 		void displayHeader();
+
 };
+
