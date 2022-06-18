@@ -29,4 +29,6 @@ $ cmake --build ./CPPWordle-build
 ```
 LICENCE
 -------
+
 GNU GPL v3
+
