@@ -18,52 +18,66 @@
 
 #include "Game.hpp"
 
+const double VERSION = 2.0;
+
 int main()
 {
 
-	//Variable Declaration
-
-	bool ansCheck = false;
-	bool continuePlaying = true;
-	bool gameControl = true;
-	bool playerInput = true;
-	char userInputChar;
-	int maxNumberAttempts;
-	int attemptNumber;
-	std::string gameWord;
-	std::string playerWord;
-	std::vector<char> gameWordVector;
-	std::vector<char> playerWordVector;
-
-	//Function Declaration
-	void changecolor(int color);
-	void convertToVec(std::string oldString, std::vector<char>&newVector);
-	void displayHeader();
-	bool compareChar(std::vector<char>&i, std::vector<char>&j);
-	void clearScreen();
-	void verifyLength(std::string & word);
-	void verifyNum(int& num);
+	//Class Declaration
+	Game mygame;
 
 
 	//Header
-	displayHeader();
+	mygame.changeColor(11);
+	std::cout
+		<< "################################################################################\n"
+		<< "#        CPPWordle                Version " << VERSION << "              Anthony Ciulla      #\n"
+		<< "################################################################################\n"
+		<<
+		std::endl;
+	mygame.changeColor(15);
+	//Program Description
+	std::cout << std::endl;
+	std::cout
+		<< "Description:\n"
+		<< "To play Wordle, you first will be asked to enter a number reflecting\n"
+		<< "the number of attempts the player will have to guess the obejctive word\n"
+		<< "then, you will then be asked to submit a five character word to try to guess.\n"
+		<< "\nLegend:\n"
+		<< "After you guess a word, you will have it redisplayed to you with the colors\n"
+		<< "indicating if it was correct or wrong.\n"
+		<<
+		std::endl;
+	mygame.changeColor(10);
+	std::cout
+		<< "This color indicates the letter is in the correct place and spot in the word"
+		<<
+		std::endl;
+	mygame.changeColor(14);
+	std::cout
+		<< "This color indicates the letter appears in the word but not in the current spot"
+		<<
+		std::endl;
+	mygame.changeColor(8);
+	std::cout
+		<< "This color indicates the letter does not appear in the word\n"
+		<<
+		std::endl;
+	mygame.changeColor(15);
+
+	bool continuePlaying = true;
 
 	while (continuePlaying) {
 
-		//Reset Variables
-
-		attemptNumber = 0;
-		gameWord = "";
-		gameWordVector.clear();
-		playerWord = "";
-		playerWordVector.clear();
-		continuePlaying = false;
-		gameControl = false;
-		playerInput = true;
+		bool continuePlaying = false;
+		bool gameControl = false;
+		bool playerInput = true;
 
 		//Ask if player wants to play
 		//This is also where the loop will run to if they 
 		//want to play again
+
+		char userInputChar;
 
 		std::cout << std::endl << "would you like to play? (y/n): ";
 		std::cin >> userInputChar;
@@ -89,27 +103,47 @@ int main()
 			break;
 		}
 
+		//reset and initialize variables
+		std::vector<char> gameWord;
+		std::vector<char> playerWord;
+		int maxRounds;
+		int roundNumber;
+
+
 		//They want to play
 		while (gameControl == true) {
 
+			//Reset Variables
+			mygame.ResetVariables();
+
 			//get max attempts allowed and verify it's a number
 			std::cout << "\nHow many attempts allowed: ";
-			std::cin >> maxNumberAttempts;
-			verifyNum(maxNumberAttempts);
+			std::cin >> maxRounds;
+
+			//set the max rounds
+			mygame.verifyNum(maxRounds);
+			mygame.SetMaxRounds(maxRounds);
 			std::cout << "\n" << std::endl;
+
+			std::string tempGameWord;
 
 			//get word to be guessed from player
 			std::cout << "What word would you like the player to guess: ";
-			std::cin >> gameWord;
+			std::cin >> tempGameWord;
 			std::cout << "\n" << std::endl;
 
 			//verify / set word
-			verifyLength(gameWord);
-			convertToVec(gameWord, gameWordVector);
-	
+			std::vector<char> gameWordVec;
+			mygame.verifyLength(tempGameWord);
+			mygame.ConvertToVec(tempGameWord, gameWordVec);
+			mygame.SetGameWord(gameWordVec);
+			//clear the game word
+			tempGameWord = "";
+			gameWordVec.clear();
 
 			// clear screen
-			clearScreen();
+			mygame.clearScreen();
+
 
 			//get players word
 			std::cout << "Enter a five character word: \n";
@@ -118,28 +152,33 @@ int main()
 			while (playerInput == true) {
 				
 				//Begin attempt
-				attemptNumber += 1;
+				mygame.SetRoundNumber();
 
-				//reset playerWord
-				playerWord = "";
-				playerWordVector.clear();
+				roundNumber = mygame.GetRoundNumber();
+				maxRounds = mygame.GetMaxRounds();
 
-				std::cout << "\nGUESS (" << attemptNumber << "/" << maxNumberAttempts << "): ";
+				std::string tempPlayerWord;
+
+				std::cout << "\nGUESS (" << roundNumber << "/" << maxRounds << "): ";
 
 				//get and verify guess
-				std::cin >> playerWord;
-				verifyLength(playerWord);
-				convertToVec(playerWord, playerWordVector);
+				std::vector<char> playerWordVec;
+				std::cin >> tempPlayerWord;
+				mygame.verifyLength(tempPlayerWord);
+				mygame.ConvertToVec(tempPlayerWord, playerWordVec);
+				mygame.SetPlayerWord(playerWordVec);
+				playerWordVec.clear();
 
+				tempPlayerWord = "";
 
 				//compare
-				ansCheck = compareChar(playerWordVector, gameWordVector);
+				bool ansCheck = mygame.CompareWords();
 
 
 				//works
 				if (ansCheck == true) {
 					//correct answer
-					std::cout << "\nSuccess! It took you " << attemptNumber << " tries!\n";
+					std::cout << "\nSuccess! It took you " << roundNumber << " tries!\n";
 					//reset the while loops
 					gameControl = false;
 					continuePlaying = true;
@@ -150,13 +189,16 @@ int main()
 					playerInput = true;
 				}
 
-				if (attemptNumber == maxNumberAttempts && ansCheck != true) {
+				if (roundNumber == maxRounds && ansCheck != true) {
 					//reset loops, player lost via max attempts
 					playerInput = false;
 					continuePlaying = true;
 					gameControl = false;
+					std::string tempGameWord = mygame.GetGameWord();
 
-					std::cout << "\nFailure. The correct word was: " << gameWord << "\n";
+					std::cout << "\nFailure. The correct word was: " << tempGameWord << "\n";
+
+					tempGameWord.clear();
 				}
 			}
 		}
