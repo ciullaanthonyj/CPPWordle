@@ -1,6 +1,6 @@
 /*
- *  File: Game.hpp
- *  Desc: main header file for game
+ *  File: Output.hpp
+ *  Desc: main header file for output
  *  Author: Anthony Ciulla
  *
  *  This file is part of cWordle.
