@@ -49,7 +49,7 @@ void Game::IncRoundNumber()
 }
 
 //BIG BOY ALGORITHM lol
-bool Game::CompareWords()
+bool Game::CompareWords() const
 {
 	//initialize a temp vector to hold the correct characters,
 	//so that we can test against them. This is for the common
@@ -125,16 +125,6 @@ int Game::GetMaxRounds() const
 int Game::GetRoundNumber() const
 {
 	return SafeRoundNumber;
-}
-
-//Returns game word
-std::string Game::GetGameWord() const
-{
-	std::string TempGameWordString;
-	for (auto num : SafeGameWord) {
-		TempGameWordString.push_back(toupper(SafeGameWord[num]));
-	}
-	return TempGameWordString;
 }
 
 //Clears screen for gameplay

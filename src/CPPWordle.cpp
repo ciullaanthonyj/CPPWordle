@@ -94,6 +94,7 @@ int main()
 
 			//get word to be guessed from player
 			std::cout << "What word would you like the player to guess: ";
+			tempGameWord = "";
 			std::cin >> tempGameWord;
 			std::cout << "\n" << std::endl;
 
@@ -103,7 +104,6 @@ int main()
 			mygame.ConvertToVec(tempGameWord, gameWordVec);
 			mygame.SetGameWord(gameWordVec);
 			//clear the game word
-			tempGameWord = "";
 			gameWordVec.clear();
 
 			// clear screen
@@ -159,7 +159,6 @@ int main()
 					playerInput = false;
 					continuePlaying = true;
 					gameControl = false;
-					std::string tempGameWord = mygame.GetGameWord();
 
 					std::cout << "\nFailure. The correct word was: " << tempGameWord << "\n";
 

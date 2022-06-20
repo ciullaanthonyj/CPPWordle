@@ -62,15 +62,13 @@ class Game {
 
 		void IncRoundNumber();
 
-		bool CompareWords();
+		bool CompareWords() const;
 
 		void ResetVariables();
 
 		int GetMaxRounds() const;
 
 		int GetRoundNumber() const;
-
-		std::string GetGameWord() const;
 
 		void clearScreen();
 
