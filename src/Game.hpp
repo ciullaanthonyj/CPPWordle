@@ -66,11 +66,11 @@ class Game {
 
 		void ResetVariables();
 
-		int GetMaxRounds();
+		int GetMaxRounds() const;
 
-		int GetRoundNumber();
+		int GetRoundNumber() const;
 
-		std::string GetGameWord();
+		std::string GetGameWord() const;
 
 		void clearScreen();
 

@@ -117,18 +117,18 @@ void Game::ResetVariables()
 	SafeGameWord.clear();
 }
 
-int Game::GetMaxRounds()
+int Game::GetMaxRounds() const
 {
 	return SafeMaxRounds;
 }
 
-int Game::GetRoundNumber()
+int Game::GetRoundNumber() const
 {
 	return SafeRoundNumber;
 }
 
 //Returns game word
-std::string Game::GetGameWord()
+std::string Game::GetGameWord() const
 {
 	std::string TempGameWordString;
 	for (auto num : SafeGameWord) {
