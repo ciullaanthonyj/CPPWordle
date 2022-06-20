@@ -17,6 +17,7 @@
  */
 
 #include "Game.hpp"
+Output newOut;
 
 
 //Converts string to vector
@@ -58,12 +59,12 @@ bool Game::CompareWords()
 
 	//Exact Match
 	if (SafePlayerWord == SafeGameWord) {
-		changeColor(COLORS::GREEN); //green
+		newOut.changeColor(COLORS::GREEN); //green
 
 		for (auto& num : SafePlayerWord) {
 			std::cout << num;
 		}
-		changeColor(COLORS::WHITE);
+		newOut.changeColor(COLORS::WHITE);
 		return true;
 	}
 
@@ -78,30 +79,30 @@ bool Game::CompareWords()
 		//Check for correct char
 		for (int i = 0; i < 5; i++) {
 			if (SafePlayerWord[i] == SafeGameWord[i]) {
-				changeColor(COLORS::GREEN); //green
+				newOut.changeColor(COLORS::GREEN); //green
 				std::cout << SafePlayerWord[i];
-				changeColor(COLORS::WHITE); //white
+				newOut.changeColor(COLORS::WHITE); //white
 			}
 			//Check for correct char wrong place
 			else if (find(SafeGameWord.begin(), SafeGameWord.end(), SafePlayerWord[i]) != SafeGameWord.end()) {
 				//Make sure that the char isn't correct somewhere in the word
 				if (find(correct.begin(), correct.end(), SafePlayerWord[i]) == correct.end()) {
-					changeColor(COLORS::YELLOW); //yellow
+					newOut.changeColor(COLORS::YELLOW); //yellow
 					std::cout << SafePlayerWord[i];
-					changeColor(COLORS::WHITE); //white
+					newOut.changeColor(COLORS::WHITE); //white
 				}
 				//if it is print it gray
 				else {
-					changeColor(COLORS::GREY); //gray
+					newOut.changeColor(COLORS::GREY); //gray
 					std::cout << SafePlayerWord[i];
-					changeColor(COLORS::WHITE); //white
+					newOut.changeColor(COLORS::WHITE); //white
 				}
 			}
 			//lastly wrong char doesn't belong in word.
 			else {
-				changeColor(COLORS::GREY); //gray
+				newOut.changeColor(COLORS::GREY); //gray
 				std::cout << SafePlayerWord[i];
-				changeColor(COLORS::WHITE); //white
+				newOut.changeColor(COLORS::WHITE); //white
 			}
 		}
 		return false;
@@ -136,31 +137,6 @@ std::string Game::GetGameWord()
 	return TempGameWordString;
 }
 
-void Game::changeColor(COLORS newColor)
-{
-	switch (newColor)
-	{
-	case COLORS::GREY:
-		std::cout << ESC << "[38;2;192;192;192m";
-		break;
-	case COLORS::GREEN:
-		std::cout << ESC << "[38;2;0;255;0m";
-		break;
-	case COLORS::BLUE:
-		std::cout << ESC << "[38;2;0;204;204m";
-		break;
-	case COLORS::RED:
-		std::cout << ESC << "[38;2;255;0;0m";
-		break;
-	case COLORS::YELLOW:
-		std::cout << ESC << "[38;2;255;255;0m";
-		break;
-	case COLORS::WHITE:
-		std::cout << ESC << "[38;2;255;255;255m";
-		break;
-	}
-}
-
 //Clears screen for gameplay
 void Game::clearScreen()
 {
@@ -177,9 +153,9 @@ void Game::verifyLength(std::string& word)
 	std::cin.ignore();
 
 	if (word.size() != 5) {
-		changeColor(COLORS::RED);
+		newOut.changeColor(COLORS::RED);
 		std::cout << "Invalid input. Try again:";
-		changeColor(COLORS::WHITE);
+		newOut.changeColor(COLORS::WHITE);
 		std::cout << " ";
 		std::cin >> word;
 		verifyLength(word);
@@ -195,9 +171,9 @@ void Game::verifyNum(int& num)
 
 	if (num <= 0) {
 		//number is negative invalid
-		changeColor(COLORS::RED);
+		newOut.changeColor(COLORS::RED);
 		std::cout << "Invalid input. Try again:";
-		changeColor(COLORS::WHITE);
+		newOut.changeColor(COLORS::WHITE);
 		std::cout << " ";
 		std::cin >> num;
 		verifyNum(num);

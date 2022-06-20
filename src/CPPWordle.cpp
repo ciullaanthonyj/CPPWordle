@@ -18,54 +18,17 @@
 
 #include "Game.hpp"
 
-const double VERSION = 2.0;
-
 int main()
 {
 
 	//Class Declaration
 	Game mygame;
+	Output newOut;
 
 	//set output
 	std::cout << std::fixed << std::setprecision(1) << std::showpoint << std::endl;
 
-	//Header
-	mygame.changeColor(COLORS::BLUE);
-	std::cout
-		<< "################################################################################\n"
-		<< "#        CPPWordle                Version " << VERSION << "              Anthony Ciulla      #\n"
-		<< "################################################################################\n"
-		<<
-		std::endl;
-	mygame.changeColor(COLORS::WHITE);
-	//Program Description
-	std::cout << std::endl;
-	std::cout
-		<< "Description:\n"
-		<< "To play Wordle, you first will be asked to enter a number reflecting\n"
-		<< "the number of attempts the player will have to guess the obejctive word\n"
-		<< "then, you will then be asked to submit a five character word to try to guess.\n"
-		<< "\nLegend:\n"
-		<< "After you guess a word, you will have it redisplayed to you with the colors\n"
-		<< "indicating if it was correct or wrong.\n"
-		<<
-		std::endl;
-	mygame.changeColor(COLORS::GREEN);
-	std::cout
-		<< "This color indicates the letter is in the correct place and spot in the word"
-		<<
-		std::endl;
-	mygame.changeColor(COLORS::YELLOW);
-	std::cout
-		<< "This color indicates the letter appears in the word but not in the current spot"
-		<<
-		std::endl;
-	mygame.changeColor(COLORS::GREY);
-	std::cout
-		<< "This color indicates the letter does not appear in the word\n"
-		<<
-		std::endl;
-	mygame.changeColor(COLORS::WHITE);
+	newOut.DisplayHeader();
 
 	bool continuePlaying = true;
 

@@ -22,6 +22,9 @@
 
 #define GAME_H
 
+//CPPWordle header
+#include "Output.hpp"
+
 //library headers
 #include <algorithm>
 #include <cstdio>
@@ -35,26 +38,6 @@
 const std::string ESC = "\033";
 
 //Classes
-
-enum class COLORS : int
-{
-	BLACK = 0,
-	DARKBLUE = 1,
-	DARKGREEN = 2,
-	DARKCYAN = 3,
-	DARKRED = 4,
-	DARKMAGENTA = 5,
-	DARKYELLOW = 6,
-	WHITE = 7,
-	GREY = 8,
-	BLUE = 9,
-	GREEN = 10,
-	CYAN = 11,
-	RED = 12,
-	MAGENTA = 13,
-	YELLOW = 14,
-	LIGHTGREY = 15,
-};
 
 class Game {
 	private:
@@ -88,8 +71,6 @@ class Game {
 		int GetRoundNumber();
 
 		std::string GetGameWord();
-
-		void changeColor(COLORS newColor);
 
 		void clearScreen();
 

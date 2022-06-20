@@ -7,7 +7,7 @@ cmake_minimum_required (VERSION 3.8)
 project ("CPPWordle")
 
 
-add_executable (CPPWordle "src/CPPWordle.cpp" "src/Game.hpp" "src/Game.cpp")
+add_executable (CPPWordle "src/CPPWordle.cpp" "src/Game.hpp" "src/Game.cpp" "src/Output.cpp")
 
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
