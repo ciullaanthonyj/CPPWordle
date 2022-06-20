@@ -18,6 +18,8 @@
 
 #include "Game.hpp"
 
+const std::string ESC = "\033";
+
 //Converts string to vector
 void Game::ConvertToVec(std::string OldWord, std::vector<char>& NewVector) {
 	for (int i = 0; i < 5; i++) {
@@ -57,12 +59,12 @@ bool Game::CompareWords()
 
 	//Exact Match
 	if (SafePlayerWord == SafeGameWord) {
-		changeColor("green"); //green
+		changeColor(COLORS::GREEN); //green
 
 		for (auto& num : SafePlayerWord) {
 			std::cout << num;
 		}
-		changeColor("white");
+		changeColor(COLORS::WHITE);
 		return true;
 	}
 
@@ -77,30 +79,30 @@ bool Game::CompareWords()
 		//Check for correct char
 		for (int i = 0; i < 5; i++) {
 			if (SafePlayerWord[i] == SafeGameWord[i]) {
-				changeColor("green"); //green
+				changeColor(COLORS::GREEN); //green
 				std::cout << SafePlayerWord[i];
-				changeColor("white"); //white
+				changeColor(COLORS::WHITE); //white
 			}
 			//Check for correct char wrong place
 			else if (find(SafeGameWord.begin(), SafeGameWord.end(), SafePlayerWord[i]) != SafeGameWord.end()) {
 				//Make sure that the char isn't correct somewhere in the word
 				if (find(correct.begin(), correct.end(), SafePlayerWord[i]) == correct.end()) {
-					changeColor("yellow"); //yellow
+					changeColor(COLORS::YELLOW); //yellow
 					std::cout << SafePlayerWord[i];
-					changeColor("white"); //white
+					changeColor(COLORS::WHITE); //white
 				}
 				//if it is print it gray
 				else {
-					changeColor("gray"); //gray
+					changeColor(COLORS::GREY); //gray
 					std::cout << SafePlayerWord[i];
-					changeColor("white"); //white
+					changeColor(COLORS::WHITE); //white
 				}
 			}
 			//lastly wrong char doesn't belong in word.
 			else {
-				changeColor("gray"); //gray
+				changeColor(COLORS::GREY); //gray
 				std::cout << SafePlayerWord[i];
-				changeColor("white"); //white
+				changeColor(COLORS::WHITE); //white
 			}
 		}
 		return false;
@@ -135,27 +137,28 @@ std::string Game::GetGameWord()
 	return TempGameWordString;
 }
 
-//Change the color of the console text via ansi. Haven't gotten functional 100% on CMake build from github copy outside of vs
-void Game::changeColor(std::string newColor)
+void Game::changeColor(COLORS newColor)
 {
-	//Couldn't figure out the enum type or how to properly match it so this will have to do for now
-	if (newColor == "gray") {
-		std::cout << "\033[38;2;192;192;192m";
-	}
-	if (newColor == "green") {
-		std::cout << "\033[38;2;0;255;0m";
-	}
-	if (newColor == "blue") {
-		std::cout << "\033[38;2;0;204;204m";
-	}
-	if (newColor == "red") {
-		std::cout << "\033[38;2;255;0;0m";
-	}
-	if (newColor == "yellow") {
-		std::cout << "\033[38;2;255;255;0m";
-	}
-	if (newColor == "white") {
-		std::cout << "\033[38;2;255;255;255m";
+	switch (newColor)
+	{
+	case COLORS::GREY:
+		std::cout << ESC << "[38;2;192;192;192m";
+		break;
+	case COLORS::GREEN:
+		std::cout << ESC << "[38;2;0;255;0m";
+		break;
+	case COLORS::BLUE:
+		std::cout << ESC << "[38;2;0;204;204m";
+		break;
+	case COLORS::RED:
+		std::cout << ESC << "[38;2;255;0;0m";
+		break;
+	case COLORS::YELLOW:
+		std::cout << ESC << "[38;2;255;255;0m";
+		break;
+	case COLORS::WHITE:
+		std::cout << ESC << "[38;2;255;255;255m";
+		break;
 	}
 }
 
@@ -175,9 +178,9 @@ void Game::verifyLength(std::string& word)
 	std::cin.ignore();
 
 	if (word.size() != 5) {
-		changeColor("red");
+		changeColor(COLORS::RED);
 		std::cout << "Invalid input. Try again:";
-		changeColor("white");
+		changeColor(COLORS::WHITE);
 		std::cout << " ";
 		std::cin >> word;
 		verifyLength(word);
@@ -193,9 +196,9 @@ void Game::verifyNum(int& num)
 
 	if (num <= 0) {
 		//number is negative invalid
-		changeColor("red");
+		changeColor(COLORS::RED);
 		std::cout << "Invalid input. Try again:";
-		changeColor("white");
+		changeColor(COLORS::WHITE);
 		std::cout << " ";
 		std::cin >> num;
 		verifyNum(num);

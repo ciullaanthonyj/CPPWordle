@@ -32,6 +32,27 @@
 #include <vector>
 
 //Class
+
+enum class COLORS : int
+{
+	BLACK = 0,
+	DARKBLUE = 1,
+	DARKGREEN = 2,
+	DARKCYAN = 3,
+	DARKRED = 4,
+	DARKMAGENTA = 5,
+	DARKYELLOW = 6,
+	WHITE = 7,
+	GREY = 8,
+	BLUE = 9,
+	GREEN = 10,
+	CYAN = 11,
+	RED = 12,
+	MAGENTA = 13,
+	YELLOW = 14,
+	LIGHTGREY = 15,
+};
+
 class Game {
 	private:
 
@@ -65,7 +86,7 @@ class Game {
 
 		std::string GetGameWord();
 
-		void changeColor(std::string newColor);
+		void changeColor(COLORS newColor);
 
 		void clearScreen();
 
