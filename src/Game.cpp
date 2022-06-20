@@ -18,7 +18,6 @@
 
 #include "Game.hpp"
 
-const std::string ESC = "\033";
 
 //Converts string to vector
 void Game::ConvertToVec(std::string OldWord, std::vector<char>& NewVector) {
@@ -30,22 +29,22 @@ void Game::ConvertToVec(std::string OldWord, std::vector<char>& NewVector) {
 //set private class properties:
 void Game::SetGameWord(std::vector<char> GameWord)
 {
-	SafeGameWord = GameWord;
+	Game::SafeGameWord = GameWord;
 }
 
 void Game::SetPlayerWord(std::vector<char> PlayerWord)
 {
-	SafePlayerWord = PlayerWord;
+	Game::SafePlayerWord = PlayerWord;
 }
 
 void Game::SetMaxRounds(int MaxRounds)
 {
-	SafeMaxRounds = MaxRounds;
+	Game::SafeMaxRounds = MaxRounds;
 }
 
-void Game::SetRoundNumber()
+void Game::IncRoundNumber()
 {
-	SafeRoundNumber++;
+	Game::SafeRoundNumber++;
 }
 
 //BIG BOY ALGORITHM lol

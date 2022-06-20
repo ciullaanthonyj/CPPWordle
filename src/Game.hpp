@@ -31,7 +31,10 @@
 #include <string>
 #include <vector>
 
-//Class
+//Const
+const std::string ESC = "\033";
+
+//Classes
 
 enum class COLORS : int
 {
@@ -60,7 +63,7 @@ class Game {
 
 		std::vector<char> SafePlayerWord;
 
-		int SafeMaxRounds;
+		int SafeMaxRounds = 0;
 
 		int SafeRoundNumber = 0;
 
@@ -74,7 +77,7 @@ class Game {
 
 		void SetMaxRounds(int MaxRounds);
 
-		void SetRoundNumber();
+		void IncRoundNumber();
 
 		bool CompareWords();
 

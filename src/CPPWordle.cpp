@@ -154,7 +154,7 @@ int main()
 			while (playerInput == true) {
 				
 				//Begin attempt
-				mygame.SetRoundNumber();
+				mygame.IncRoundNumber();
 
 				roundNumber = mygame.GetRoundNumber();
 				maxRounds = mygame.GetMaxRounds();
