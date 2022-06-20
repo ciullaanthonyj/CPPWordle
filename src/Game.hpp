@@ -54,21 +54,21 @@ class Game {
 
 		void ConvertToVec(std::string OldWord, std::vector<char>& NewVector);
 
-		void SetGameWord(std::vector<char> GameWord);
+		void SetGameWord(std::vector<char> GameWord) { Game::SafeGameWord = GameWord; };
 
-		void SetPlayerWord(std::vector<char> PlayerWord);
+		void SetPlayerWord(std::vector<char> PlayerWord) { Game::SafePlayerWord = PlayerWord; };
 
-		void SetMaxRounds(int MaxRounds);
+		void SetMaxRounds(int MaxRounds) { Game::SafeMaxRounds = MaxRounds; };
 
-		void IncRoundNumber();
+		void IncRoundNumber() { Game::SafeRoundNumber++; };
 
 		bool CompareWords() const;
 
 		void ResetVariables();
 
-		int GetMaxRounds() const;
+		int GetMaxRounds() const { return SafeMaxRounds; };
 
-		int GetRoundNumber() const;
+		int GetRoundNumber() const { return SafeRoundNumber; };
 
 		void clearScreen();
 

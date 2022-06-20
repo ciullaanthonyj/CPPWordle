@@ -84,3 +84,4 @@ void Output::changeColor(COLORS newColor)
 		break;
 	}
 }
+

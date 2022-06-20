@@ -28,25 +28,6 @@ void Game::ConvertToVec(std::string OldWord, std::vector<char>& NewVector) {
 }
 
 //set private class properties:
-void Game::SetGameWord(std::vector<char> GameWord)
-{
-	Game::SafeGameWord = GameWord;
-}
-
-void Game::SetPlayerWord(std::vector<char> PlayerWord)
-{
-	Game::SafePlayerWord = PlayerWord;
-}
-
-void Game::SetMaxRounds(int MaxRounds)
-{
-	Game::SafeMaxRounds = MaxRounds;
-}
-
-void Game::IncRoundNumber()
-{
-	Game::SafeRoundNumber++;
-}
 
 //BIG BOY ALGORITHM lol
 bool Game::CompareWords() const
@@ -115,16 +96,6 @@ void Game::ResetVariables()
 	SafeMaxRounds = 0;
 	SafePlayerWord.clear();
 	SafeGameWord.clear();
-}
-
-int Game::GetMaxRounds() const
-{
-	return SafeMaxRounds;
-}
-
-int Game::GetRoundNumber() const
-{
-	return SafeRoundNumber;
 }
 
 //Clears screen for gameplay
