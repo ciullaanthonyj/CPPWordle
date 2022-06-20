@@ -17,6 +17,10 @@
  */
 
 #include "Game.hpp"
+//Really am trying not to include this header to keep it os non dependent but this is the only way I can find that
+//actually compiles and let's the program operate as it should
+
+#include "windows.h"
 
 int main()
 {
@@ -27,6 +31,20 @@ int main()
 
 	//set output
 	std::cout << std::fixed << std::setprecision(1) << std::showpoint << std::endl;
+
+	//TestOutput for vt100
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	if(hOut == INVALID_HANDLE_VALUE){
+		return GetLastError();
+	}
+	DWORD dwMode = 0;
+	if(!GetConsoleMode(hOut, &dwMode)){
+		return GetLastError();
+	}
+	dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+	if(!SetConsoleMode(hOut, dwMode)){
+		return GetLastError();
+	}
 
 	newOut.DisplayHeader();
 
